@@ -5,8 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assumptions.*;
@@ -21,7 +19,7 @@ public class IntegrationTests {
     static Set<String> CORRECT_ANSWERS_Q2 = Set.of("a","c");
     static Set<String> CORRECT_ANSWERS_Q3 = Set.of("c");
 
-    Map<String, List<Mark>> marks = null;
+    ResultTable marks = null;
 
     @BeforeAll
     public static void setUp() throws IOException {
@@ -39,12 +37,15 @@ public class IntegrationTests {
 
     @Test
     public void testSize() throws IOException {
-        assertEquals(10,marks.size());
+        assertEquals(10,marks.rows().size());
     }
 
     @Test
     public void test11() {
-        Mark mark = marks.get("anonymous1").get(0);
+        ResultTable.Row row = marks.rows().get(0);
+        assertEquals("anonymous1",row.id());
+        Mark mark = row.cells().get(0);
+
         assertEquals(ALL_ANSWERS,mark.allAnswers());
         assertEquals(CORRECT_ANSWERS_Q1,mark.correctAnswers());
         assertEquals(Set.of("b","c"),mark.correctAnswersSelected());
@@ -54,7 +55,10 @@ public class IntegrationTests {
 
     @Test
     public void test21() {
-        Mark mark = marks.get("anonymous2").get(0);
+        ResultTable.Row row = marks.rows().get(1);
+        assertEquals("anonymous2",row.id());
+        Mark mark = row.cells().get(0);
+
         assertEquals(ALL_ANSWERS,mark.allAnswers());
         assertEquals(CORRECT_ANSWERS_Q1,mark.correctAnswers());
         assertEquals(Set.of("b"),mark.correctAnswersSelected());
@@ -64,7 +68,9 @@ public class IntegrationTests {
 
     @Test
     public void test23() {
-        Mark mark = marks.get("anonymous2").get(2);
+        ResultTable.Row row = marks.rows().get(1);
+        assertEquals("anonymous2",row.id());
+        Mark mark = row.cells().get(2);
         assertEquals(ALL_ANSWERS,mark.allAnswers());
         assertEquals(CORRECT_ANSWERS_Q3,mark.correctAnswers());
         assertEquals(Set.of(),mark.correctAnswersSelected());

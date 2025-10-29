@@ -75,7 +75,7 @@ public class Main {
 
     }
 
-    static Map<String,List<Mark>> mark(Path inputFile, Path oracleFile) throws IOException {
+    static ResultTable mark(Path inputFile, Path oracleFile) throws IOException {
 
         Formula formula = new PartialCreditsAndPartialDeductions();
         InputTable input = getParser(inputFile).parse(inputFile);
@@ -85,8 +85,9 @@ public class Main {
         Preconditions.checkState(oracle.getRows().size()==2,"the oracle file must have two rows defining correct and possible ansers (in this order)");
         InputTable.Row correctValues = oracle.getRows().get(0);
         InputTable.Row possibleValues = oracle.getRows().get(1);
+        List<String> headers = input.getHeaders();
 
-        Map<String,List<Mark>> marks = new LinkedHashMap<>();
+        List<ResultTable.Row> results = new ArrayList<>();
 
         for (InputTable.Row row : input.getRows()) {
             String id = row.getCells().get(0).getValues().get(0);
@@ -100,11 +101,10 @@ public class Main {
                     possibleValues.getCells().get(i).getValuesAsSet()
                 );
                 markList.add(mark);
-                marks.put(id, markList);
             }
+            results.add(new ResultTable.Row(id,markList));
         }
-        return marks;
-
+        return new ResultTable(headers,results);
     }
 
     /**
@@ -120,7 +120,6 @@ public class Main {
         else {
             throw new IllegalArgumentException("Unrecognized file type: " + file);
         }
-
     }
 
     private static void showUsage() {
