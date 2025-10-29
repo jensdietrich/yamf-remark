@@ -49,6 +49,7 @@ public class Main {
         .addOption(OPT_INPUT)
         .addOption(OPT_ORACLE)
         .addOption(OPT_OUT)
+        .addOption(OPT_PROVENANCE)
         ;
 
 
@@ -79,8 +80,14 @@ public class Main {
             Path outputFile = Path.of(outputFileName);
             new TSVResultTableExporter().export(results,outputFile); // logging in exporter
 
-
-
+            if (cli.hasOption(OPT_PROVENANCE)) {
+                String provenanceFileName = cli.getOptionValue(OPT_PROVENANCE);
+                Path provenanceFile = Path.of(provenanceFileName);
+                new JSONResultTableExporter().export(results,provenanceFile);
+            }
+            else {
+                LOG.warn("No provenance information generated, use \"--{}\" option to generate this",OPT_PROVENANCE.getLongOpt());
+            }
 
         }
         catch (ParseException e) {

@@ -22,7 +22,7 @@ public class JSONResultTableExporter implements ResultTableExporter {
 
     @Override
     public void export(ResultTable table, Path file) throws IOException {
-        JSONObject json = new JSONObject();
+        JSONArray jsonResults = new JSONArray();
         table.rows().forEach(row -> {
             JSONArray array = new JSONArray();
             row.cells().forEach(cell -> {
@@ -33,11 +33,14 @@ public class JSONResultTableExporter implements ResultTableExporter {
                 cellJson.put("correct-answers",toString(cell.correctAnswers()));
                 cellJson.put("correctly-selected",toString(cell.correctAnswersSelected()));
                 cellJson.put("incorrectly-selected",toString(cell.incorrectAnswersSelected()));
-                array.put(json);
+                array.put(cellJson);
             });
-            json.put(row.id(),array);
+            JSONObject jsonRow = new JSONObject();
+            jsonRow.put("id",row.id());
+            jsonRow.put("results",array);
+            jsonResults.put(jsonRow);
         });
-        Files.writeString(file,json.toString(4));
+        Files.writeString(file,jsonResults.toString(4));
         LOG.info("results written to {}", file);
     }
 

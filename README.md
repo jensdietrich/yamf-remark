@@ -17,9 +17,16 @@ Marking exam scripts scanned with the [remark software](https://remarksoftware.c
 java -jar yamf-remark.jar
     --input <in>     a file in tab-separated format with answers chosen by
                      student for each question
+                     (required)
     --oracle <ocl>   a file in tab-separated format with the correct
                      answers for each question
+                     (required)
     --output <out>   a file where the results will be written to
+                     in tab-separated format
+                     (required)
+    --provenance <pro> a file where results will be written to 
+                     in JSON format with additional provenance information
+                     (optional)
 ```
 
 ## Structure Of Input Files
