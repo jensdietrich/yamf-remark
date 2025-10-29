@@ -14,7 +14,7 @@ Marking exam scripts scanned with the [remark software](https://remarksoftware.c
 ## Usage 
 
 ```
-java -cp <path-to-built-jar> io.github.yamf.remark.Main
+java -jar yamf-remark.jar
     --input <in>     a file in tab-separated format with answers chosen by
                      student for each question
     --oracle <ocl>   a file in tab-separated format with the correct
@@ -68,3 +68,4 @@ the logic used in as follows:
 1. the ratio of incorrect answers `OCOR` is computed by dividing the number of selected answers that are incorrect by the total number of incorrect answers
 2. the mark is computed as `COR-ICOR`, if the result is negative, it is set to zero
 
+The formula is hardcoded at the moment, but this could be changed easily. 
