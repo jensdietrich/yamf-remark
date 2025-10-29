@@ -5,9 +5,14 @@ Marking exam scripts scanned with the [remark software](https://remarksoftware.c
 ## Requirements
 
 - Java version 17 or better
-- Maven 3 (tested with 3.9.10)
+- Maven 3 (tested with 3.9.10) (only required to build from sources)
 
 ## Building
+
+The package will be automatically build and released on GitHub, and the latest version can be downloaded from 
+the [project release page](https://github.com/jensdietrich/yamf-remark/packages/).
+
+To build the project from sources, use _git_ to checkout the sources and then build the package as follows:
 
 `mvn package` - this will run test, and create the binary `yamf-remark.jar` in `target/`.
 
