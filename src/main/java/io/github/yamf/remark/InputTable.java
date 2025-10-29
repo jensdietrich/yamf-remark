@@ -9,7 +9,7 @@ import java.util.Set;
  * A (input data) table.
  * @author jens dietrich
  */
-public interface Table {
+public interface InputTable {
 
     List<String> getHeaders();
     List<Row> getRows();

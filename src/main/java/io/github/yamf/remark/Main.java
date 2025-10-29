@@ -40,7 +40,7 @@ public class Main {
 
     }
 
-    static void checkHeaders(Table input, Table oracle) {
+    static void checkHeaders(InputTable input, InputTable oracle) {
         List<String> inputHeader =  input.getHeaders();
         List<String> oracleHeader =  input.getHeaders();
         if (inputHeader.size() != oracleHeader.size()) {
@@ -55,7 +55,7 @@ public class Main {
         }
     }
 
-    static void checkRows(Table input, Table.Row correctValues, Table.Row possibleValues) {
+    static void checkRows(InputTable input, InputTable.Row correctValues, InputTable.Row possibleValues) {
         for (int i=0;i<input.getRows().size();i++) {
             checkColumnCount(input.getRows().get(i),possibleValues,"input row "+i,"possible values");
             checkColumnCount(input.getRows().get(i),correctValues,"input row "+i,"correct values");
@@ -64,13 +64,13 @@ public class Main {
         checkValues(correctValues,possibleValues,"correct values","possible values");
     }
 
-    static void checkColumnCount(Table.Row dataRow, Table.Row referenceRow, String rowName1,String rowName2) {
+    static void checkColumnCount(InputTable.Row dataRow, InputTable.Row referenceRow, String rowName1, String rowName2) {
         if (dataRow.getCells().size()!=referenceRow.getCells().size()) {
             throw new IllegalArgumentException(rowName1 + " does not have the same number of columns as " + rowName2);
         }
     }
 
-    static void checkValues(Table.Row dataRow, Table.Row possibleValues, String rowName1,String rowName2) {
+    static void checkValues(InputTable.Row dataRow, InputTable.Row possibleValues, String rowName1, String rowName2) {
         assert dataRow.getCells().size()==possibleValues.getCells().size();
         for (int i=0;i<dataRow.getCells().size();i++) {
             Set<String> values1 = dataRow.getCells().get(i).getValuesAsSet();

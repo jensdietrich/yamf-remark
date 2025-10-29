@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
  * Data structure to represent TSV data.
  * @author jens dietrich
  */
-class TSVTable implements Table {
+class TSVTable implements InputTable {
 
     private List<String> headers;
     private List<Row> rows;
