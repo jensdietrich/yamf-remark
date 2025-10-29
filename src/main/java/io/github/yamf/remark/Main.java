@@ -8,8 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Main {
 
@@ -72,6 +71,52 @@ public class Main {
         }
         catch (ParseException e) {
             showUsage();
+        }
+
+    }
+
+    static Map<String,List<Mark>> mark(Path inputFile, Path oracleFile) throws IOException {
+
+        Formula formula = new PartialCreditsAndPartialDeductions();
+        InputTable input = getParser(inputFile).parse(inputFile);
+        InputTable oracle = getParser(oracleFile).parse(oracleFile);
+        checkHeaders(input, oracle);
+
+        Preconditions.checkState(oracle.getRows().size()==2,"the oracle file must have two rows defining correct and possible ansers (in this order)");
+        InputTable.Row correctValues = oracle.getRows().get(0);
+        InputTable.Row possibleValues = oracle.getRows().get(1);
+
+        Map<String,List<Mark>> marks = new LinkedHashMap<>();
+
+        for (InputTable.Row row : input.getRows()) {
+            String id = row.getCells().get(0).getValues().get(0);
+            List<Mark> markList = new ArrayList<>();
+            for (int i=1;i<row.getCells().size();i++) {
+                Mark mark = formula.compute(
+                    row.getCells().get(i).getValuesAsSet(),
+                    correctValues.getCells().get(i).getValuesAsSet(),
+                    possibleValues.getCells().get(i).getValuesAsSet()
+                );
+                markList.add(mark);
+                marks.put(id, markList);
+            }
+        }
+        return marks;
+
+    }
+
+    /**
+     * Get the parses, e.g. by file extension.
+     * @param file
+     * @return
+     * @throws IllegalArgumentException
+     */
+    static InputTableParser getParser(Path file) throws IllegalArgumentException {
+        if (file.toString().endsWith(".tsv") || file.toString().endsWith(".csv")) {
+            return new TSVParser();
+        }
+        else {
+            throw new IllegalArgumentException("Unrecognized file type: " + file);
         }
 
     }
