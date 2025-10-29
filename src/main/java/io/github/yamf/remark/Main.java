@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,10 +31,18 @@ public class Main {
 
     final static Option OPT_OUT= Option.builder()
         .argName("out")
-        .longOpt("outout")
+        .longOpt("output")
         .required(true)
         .hasArg()
         .desc("a file where the results will be written to")
+        .build();
+
+    final static Option OPT_PROVENANCE = Option.builder()
+        .argName("pro")
+        .longOpt("provenance")
+        .required(false)
+        .hasArg()
+        .desc("a JSON file where the results with additional provenance information will be written to")
         .build();
 
     final static Options OPTIONS = new Options()
@@ -58,14 +65,21 @@ public class Main {
             Preconditions.checkState(Files.exists(inputFile));
             Preconditions.checkState(!Files.isDirectory(inputFile));
             LOG.info("Reading input from: {}", inputFile);
-            InputTable inputTable = parser.parse(inputFile);
 
             String oracleFileName = cli.getOptionValue(OPT_ORACLE);
             Path oracleFile = Path.of(oracleFileName);
             Preconditions.checkState(Files.exists(oracleFile));
             Preconditions.checkState(!Files.isDirectory(oracleFile));
             LOG.info("Reading oracle (correct and possible answers) from: " + oracleFile);
-            InputTable oracleTable = parser.parse(oracleFile);
+
+            ResultTable results = mark(inputFile,oracleFile);
+            LOG.info("Marking done, marked {} records",results.rows().size());
+
+            String outputFileName = cli.getOptionValue(OPT_OUT);
+            Path outputFile = Path.of(outputFileName);
+            new TSVResultTableExporter().export(results,outputFile); // logging in exporter
+
+
 
 
         }

@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class TSVExporterTests {
 
-
     static Path TEST_DATA = null;
     static Path TEST_ORACLE = null;
 

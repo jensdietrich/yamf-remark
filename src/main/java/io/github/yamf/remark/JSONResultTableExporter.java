@@ -2,6 +2,7 @@ package io.github.yamf.remark;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,16 +10,16 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import static java.util.stream.Stream.*;
+
+import static com.google.common.collect.Streams.concat;
 
 
-/**
- * Exports results into TSV, for each mark only the numerical value is exported, no provenance info is attached.
- * @author jens dietrich
- */
+
 public class TSVResultTableExporter implements ResultTableExporter {
 
     final static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.0000");
-    final static Logger LOG = LoggerFactory.getLogger(TSVResultTableExporter.class);
+    final static Logger LOG = LoggerFactory.getLogger(Main.class);
 
     @Override
     public void export(ResultTable table, Path file) throws IOException {
@@ -42,4 +43,6 @@ public class TSVResultTableExporter implements ResultTableExporter {
         );
         return lines;
     }
+
+
 }
