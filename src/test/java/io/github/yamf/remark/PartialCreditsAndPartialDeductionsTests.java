@@ -92,5 +92,19 @@ public class PartialCreditsAndPartialDeductionsTests {
         assertEquals(Set.of("c","d","e"),mark.incorrectAnswersSelected());
     }
 
+    @Test
+    public void testOCorrectSomeIncorrect() {
+        Set<String> allAnswers = Set.of("a","b","c","d","e");
+        Set<String> correctAnswers = Set.of("a");
+        Set<String> selected = Set.of("b","c");
+        Mark mark = formula.compute(selected, correctAnswers, allAnswers);
+
+        assertEquals(0.0,mark.value());
+        assertEquals(allAnswers,mark.allAnswers());
+        assertEquals(correctAnswers,mark.correctAnswers());
+        assertEquals(Set.of(),mark.correctAnswersSelected());
+        assertEquals(selected,mark.incorrectAnswersSelected());
+    }
+
 
 }

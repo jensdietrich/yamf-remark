@@ -5,11 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assumptions.*;
 
@@ -21,6 +19,7 @@ public class IntegrationTests {
     static Set<String> ALL_ANSWERS = Set.of("a","b","c","d","e");
     static Set<String> CORRECT_ANSWERS_Q1 = Set.of("b","c");
     static Set<String> CORRECT_ANSWERS_Q2 = Set.of("a","c");
+    static Set<String> CORRECT_ANSWERS_Q3 = Set.of("c");
 
     Map<String, List<Mark>> marks = null;
 
@@ -61,6 +60,16 @@ public class IntegrationTests {
         assertEquals(Set.of("b"),mark.correctAnswersSelected());
         assertEquals(Set.of(),mark.incorrectAnswersSelected());
         assertEquals(0.5,mark.value(),0.001);   // 1/2 - 0 = 1/2
+    }
+
+    @Test
+    public void test23() {
+        Mark mark = marks.get("anonymous2").get(2);
+        assertEquals(ALL_ANSWERS,mark.allAnswers());
+        assertEquals(CORRECT_ANSWERS_Q3,mark.correctAnswers());
+        assertEquals(Set.of(),mark.correctAnswersSelected());
+        assertEquals(Set.of("a","b"),mark.incorrectAnswersSelected());
+        assertEquals(0.0,mark.value(),0.001);   // cannot be negative, so becomes 0
     }
 
 }

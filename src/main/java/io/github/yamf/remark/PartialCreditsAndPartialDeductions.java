@@ -27,7 +27,14 @@ public class PartialCreditsAndPartialDeductions implements Formula {
             deductions = (double)incorrectAnswersSelected.size() / (double)incorrectAnswersAll.size();
         }
 
-        return new Mark(credit - deductions,correctAnswersSelected,incorrectAnswersSelected,correctAnswers,allAnswers);
+        double m = credit - deductions;
+
+        // cannot be negative
+        if (m<0.0) {
+            m = 0.0;
+        }
+
+        return new Mark(m,correctAnswersSelected,incorrectAnswersSelected,correctAnswers,allAnswers);
     }
 
 }
