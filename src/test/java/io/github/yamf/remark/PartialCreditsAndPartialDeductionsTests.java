@@ -1,9 +1,7 @@
 package io.github.yamf.remark;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PartialCreditsAndPartialDeductionsTests {
