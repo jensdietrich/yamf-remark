@@ -36,7 +36,7 @@ java -jar yamf-remark.jar
 Input files are tables, values either characters representing answers, or comma-separated lists of characters
 representing multiple answers. 
 Values may be in double quotes.
-Tables are saved tab-separated (.tsv) format. 
+Tables are saved in tab-separated (.tsv) format. 
 
 ### The Oracle
 
@@ -76,3 +76,42 @@ the logic used in as follows:
 2. the mark is computed as `MAX(0,COR-ICOR)`, i.e. if the result is negative, it is set to zero
 
 The formula is hardcoded at the moment, but this could be changed easily. 
+
+## Result Formats
+
+### tab-separated, values only
+
+The default output format is tab-separated values, the respective files can be imported into 
+standard spreadsheet programs like excel. The header line is the same as the one used in the input data table.
+The first column contains an id (usually for the student being marked), the other cells contain the marks calculated, 
+soubles scaled between 0 and 1. 
+
+### JSON, with provenance
+
+An optional secondary output format is JSON. This does not only contain the marks, but also some 
+provenance to justify how marks where calculated. 
+
+**Example:**
+
+```json
+[
+   {
+       "id": "student42",
+       "results": [
+           {
+              "question": "Q1",
+              "value": 0.6666666666666667,
+              "possible-answers": "{a,b,c,d,e}",
+              "correct-answers": "{b,c}",
+              "correctly-selected": "{b,c}",
+              "incorrectly-selected": "{a}"
+           },
+           ...
+       ]
+   },
+   ...
+]
+```
+
+
+
