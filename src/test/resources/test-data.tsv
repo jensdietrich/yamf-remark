@@ -4,7 +4,7 @@ anonymous2	b	"(a,d)"	"(a,b)"	"(c,d,e)"	"(a,b,d)"	"(a,b,d)"	c	"(a,c)"	d	"(a,b,d)"
 anonymous3	c	"(a,e)"	c	c	"(b,c)"	"(a,b,e)"	c	a	c	"(a,c)"	b	b	e	b	"(a,d)"	"(a,c)"	"(c,e)"	"(a,b,e)"	"(c,e)"	d
 anonymous4	"(b,c,d)"	"(a,c,e)"	"(a,d)"	"(c,d)"	"(a,b)"	"(a,c,d)"	"(d,e)"	"(a,b,e)"	"(c,d)"	"(a,c,d)"	"(c,d)"	e	a	b	"(a,c,d)"	"(a,b,d)"	"(a,d)"	"(b,e)"	"(b,d,e)"	"(b,d)"
 anonymous5	"(b,c)"	"(a,e)"	c	"(c,d)"	"(b,c)"	"(a,b,d)"	c	"(a,c)"	"(b,c,d,e)"	"(a,c,d)"	b	"(a,b,c,d)"	c	c	"(a,b,d)"	"(b,c)"	a	e	"(c,d)"	d
-anonymous6	c	"(a,b,c)"	"(a,d)"	"(a,b)"	"(b,c,d,e)"	"(b,d)"	"(c,d,e)"	"(b,c)"	"(c,d)"	"(a,b,c)"	d	a	a	b	"(a,c)"	"(b,c)"	"(b,c)"	e	"(c,d,e)"	d
+anonymous6	c	BLANK	"(a,d)"	"(a,b)"	"(b,c,d,e)"	"(b,d)"	"(c,d,e)"	"(b,c)"	"(c,d)"	"(a,b,c)"	d	a	a	b	"(a,c)"	"(b,c)"	"(b,c)"	e	"(c,d,e)"	d
 anonymous7	"(b,d)"	d	"(c,e)"	d	"(b,c,e)"	"(a,b,d)"	"(c,e)"	"(b,c)"	"(b,c)"	"(a,c,d)"	"(b,c)"	"(a,b,c,d)"	b	b	"(a,c,e)"	"(b,c)"	"(a,c)"	e	"(c,d)"	d
 anonymous8	a	"(a,e)"	a	"(b,d)"	"(a,c,e)"	"(c,d)"	"(c,e)"	c	"(c,d)"	a	"(b,c,d)"	b	a	c	"(a,d)"	b	b	e	"(c,d,e)"	d
 anonymous9	"(b,c)"	"(a,e)"	"(a,b)"	"(b,c)"	"(b,c)"	d	"(c,d)"	"(a,b,c,e)"	a	"(a,b,d)"	"(b,c)"	"(a,c)"	e	b	"(a,b,e)"	d	c	e	e	b

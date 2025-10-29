@@ -54,5 +54,18 @@ public class TSVParserTests {
         }
     }
 
+    @Test
+    public void testDataRow6() throws IOException {
+        InputTable table = new TSVParser().parse(TEST_DATA);
+        List<InputTable.Row> rows = table.getRows();
+        assertTrue(5<rows.size());
+        InputTable.Row row = rows.get(5);
+        assertEquals(21,row.getCells().size());
+
+        // BLANK entry at col 3
+        assertEquals("anonymous6",row.getCells().get(0).toString());
+        assertEquals(List.of(),row.getCells().get(2).getValues());
+    }
+
 
 }

@@ -67,8 +67,8 @@ public class TSVParser implements InputTableParser {
 
             return new TSVTable.TSVCell(values);
         } else {
-            // Single character
-            if (!cellStr.isEmpty()) {
+            // simple string
+            if (!cellStr.isEmpty() && !cellStr.toUpperCase().equals("BLANK")) {
                 return new TSVTable.TSVCell(cellStr);
             } else {
                 return new TSVTable.TSVCell(); // Empty cell

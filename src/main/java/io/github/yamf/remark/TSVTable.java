@@ -105,6 +105,7 @@ class TSVTable implements InputTable {
                 return String.valueOf(values.get(0));
             }
             else {
+                // also applies to empty cells
                 return values.stream().collect(Collectors.joining(",","(",")"));
             }
         }
