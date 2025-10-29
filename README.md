@@ -19,7 +19,7 @@ java -jar yamf-remark.jar
                      student for each question
     --oracle <ocl>   a file in tab-separated format with the correct
                      answers for each question
-    --outout <out>   a file where the results will be written to
+    --output <out>   a file where the results will be written to
 ```
 
 ## Structure Of Input Files
