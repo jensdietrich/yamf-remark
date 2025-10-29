@@ -65,7 +65,7 @@ The formula used is implemented in `io.github.yamf.remark.PartialCreditsAndParti
 the logic used in as follows: 
 
 1. the ratio of correct answers `COR` is computed by dividing the number of selected answers that are correct by the total number of correct answers
-1. the ratio of incorrect answers `OCOR` is computed by dividing the number of selected answers that are incorrect by the total number of incorrect answers
-2. the mark is computed as `COR-ICOR`, if the result is negative, it is set to zero
+1. the ratio of incorrect answers `ICOR` is computed by dividing the number of selected answers that are incorrect by the total number of incorrect answers
+2. the mark is computed as `MAX(0,COR-ICOR)`, i.e. if the result is negative, it is set to zero
 
 The formula is hardcoded at the moment, but this could be changed easily. 
