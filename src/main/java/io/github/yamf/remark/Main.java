@@ -92,7 +92,9 @@ public class Main {
             String id = row.getCells().get(0).getValues().get(0);
             List<Mark> markList = new ArrayList<>();
             for (int i=1;i<row.getCells().size();i++) {
+                String question = input.getHeaders().get(i);
                 Mark mark = formula.compute(
+                    question,
                     row.getCells().get(i).getValuesAsSet(),
                     correctValues.getCells().get(i).getValuesAsSet(),
                     possibleValues.getCells().get(i).getValuesAsSet()

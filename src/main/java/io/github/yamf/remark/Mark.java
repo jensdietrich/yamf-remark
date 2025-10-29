@@ -13,14 +13,15 @@ import java.util.Set;
  * @param correctAnswers
  * @param allAnswers
  */
-public record Mark (double value, Set<String> correctAnswersSelected,Set<String> incorrectAnswersSelected, Set<String> correctAnswers,Set<String> allAnswers){
+public record Mark (double value, String question, Set<String> correctAnswersSelected,Set<String> incorrectAnswersSelected, Set<String> correctAnswers,Set<String> allAnswers){
 
-    public Mark(double value, Set<String> correctAnswersSelected, Set<String> incorrectAnswersSelected, Set<String> correctAnswers, Set<String> allAnswers) {
+    public Mark(double value, String question, Set<String> correctAnswersSelected, Set<String> incorrectAnswersSelected, Set<String> correctAnswers, Set<String> allAnswers) {
         this.value = value;
         this.correctAnswersSelected = correctAnswersSelected;
         this.incorrectAnswersSelected = incorrectAnswersSelected;
         this.correctAnswers = correctAnswers;
         this.allAnswers = allAnswers;
+        this.question = question;
 
         // verify
         Preconditions.checkArgument(allAnswers.containsAll(correctAnswers));

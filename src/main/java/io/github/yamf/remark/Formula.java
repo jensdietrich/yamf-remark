@@ -7,5 +7,5 @@ import java.util.Set;
  * @author jens dietrich
  */
 public interface Formula {
-    Mark compute (Set<String> answersSelected, Set<String> correctAnswers, Set<String> allAnswers);
+    Mark compute (String question,Set<String> answersSelected, Set<String> correctAnswers, Set<String> allAnswers);
 }
