@@ -26,7 +26,7 @@ public class TSVParser {
                 } else {
                     // Parse data line
                     String[] cells = line.split("\t", -1); // -1 to include trailing empty strings
-                    TSVTable.Row row = parseRow(cells);
+                    TSVTable.TSVRow row = parseRow(cells);
                     result.addRow(row);
                 }
             }
@@ -35,18 +35,18 @@ public class TSVParser {
         return result;
     }
 
-    private static TSVTable.Row parseRow(String[] cellStrings) {
-        TSVTable.Row row = new TSVTable.Row();
+    private static TSVTable.TSVRow parseRow(String[] cellStrings) {
+        TSVTable.TSVRow row = new TSVTable.TSVRow();
 
         for (String cellStr : cellStrings) {
-            TSVTable.Cell cell = parseCell(cellStr);
+            TSVTable.TSVCell cell = parseCell(cellStr);
             row.addCell(cell);
         }
 
         return row;
     }
 
-    private static TSVTable.Cell parseCell(String cellStr) {
+    private static TSVTable.TSVCell parseCell(String cellStr) {
         cellStr = cellStr.trim();
 
         if (cellStr.startsWith("\"") && cellStr.endsWith("\"")) {
@@ -66,13 +66,13 @@ public class TSVParser {
                 }
             }
 
-            return new TSVTable.Cell(values);
+            return new TSVTable.TSVCell(values);
         } else {
             // Single character
             if (!cellStr.isEmpty()) {
-                return new TSVTable.Cell(cellStr);
+                return new TSVTable.TSVCell(cellStr);
             } else {
-                return new TSVTable.Cell(); // Empty cell
+                return new TSVTable.TSVCell(); // Empty cell
             }
         }
     }

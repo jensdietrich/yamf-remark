@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
  * Data structure to represent TSV data.
  * @author jens dietrich
  */
-class TSVTable {
+class TSVTable implements Table {
 
     private List<String> headers;
     private List<Row> rows;
@@ -22,7 +22,7 @@ class TSVTable {
         this.headers = headers;
     }
 
-    public void addRow(Row row) {
+    public void addRow(TSVRow row) {
         this.rows.add(row);
     }
 
@@ -53,23 +53,19 @@ class TSVTable {
     }
 
     // Represents a single row with cells
-    static class Row {
+    static class TSVRow implements Row {
         private List<Cell> cells;
 
-        public Row() {
+        public TSVRow() {
             this.cells = new ArrayList<>();
         }
 
-        public void addCell(Cell cell) {
+        public void addCell(TSVCell cell) {
             this.cells.add(cell);
         }
 
         public List<Cell> getCells() {
             return cells;
-        }
-
-        public Cell getCell(int index) {
-            return cells.get(index);
         }
 
         @Override
@@ -79,19 +75,19 @@ class TSVTable {
     }
 
     // Represents a cell containing either a single character or list of values
-    static class Cell {
+    static class TSVCell implements Cell {
         private List<String> values;
 
-        public Cell() {
+        public TSVCell() {
             this.values = new ArrayList<>();
         }
 
-        public Cell(String singleChar) {
+        public TSVCell(String singleChar) {
             this.values = new ArrayList<>();
             this.values.add(singleChar);
         }
 
-        public Cell(List<String> values) {
+        public TSVCell(List<String> values) {
             this.values = new ArrayList<>(values);
         }
 

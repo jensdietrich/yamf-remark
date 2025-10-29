@@ -1,2 +1,3 @@
-Q1	Q2	Q3	Q4	Q5	Q6	Q7	Q8	Q9	Q10	Q11	Q12	Q13	Q14	Q15	Q16	Q17	Q18	Q19	Q20
-(b,c)	"(a,e)"	c	(c,d)	(b,c)	"(a,b,d)"	(c)	"(b,c)"	c	"(a,b,c,d)"	b	(b,d)	c	b	(a,b,d)	"(b,c)"	"(b,c)"	e	c	d
+LABEL	Q1	Q2	Q3	Q4	Q5	Q6	Q7	Q8	Q9	Q10	Q11	Q12	Q13	Q14	Q15	Q16	Q17	Q18	Q19	Q20
+correct	(b,c)	(a,e)	c	(c,d)	(b,c)	(a,b,d)	(c)	(b,c)	c	(a,b,c,d)	b	(b,d)	c	b	(a,b,d)	(b,c)	(b,c)	e	c	d
+all	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)	(a,b,c,d,e)

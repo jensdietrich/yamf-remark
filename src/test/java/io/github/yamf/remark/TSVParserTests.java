@@ -25,12 +25,11 @@ public class TSVParserTests {
 
         TEST_ORACLE = Path.of(TSVParserTests.class.getResource("/test-oracle.tsv").getPath());
         assumeTrue(TEST_ORACLE.toFile().exists());
-
     }
 
     @Test
     public void testDataHeader() throws IOException {
-        TSVTable table = TSVParser.parse(TEST_DATA);
+        Table table = TSVParser.parse(TEST_DATA);
         List<String> headerRow = table.getHeaders();
         String[] labels = {
             "SID","Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10","Q11","Q12","Q13","Q14","Q15","Q16","Q17","Q18","Q19","Q20"
@@ -42,10 +41,10 @@ public class TSVParserTests {
 
     @Test
     public void testDataRow1() throws IOException {
-        TSVTable table = TSVParser.parse(TEST_DATA);
-        List<TSVTable.Row> rows = table.getRows();
+        Table table = TSVParser.parse(TEST_DATA);
+        List<Table.Row> rows = table.getRows();
         assertTrue(0<rows.size());
-        TSVTable.Row row = rows.get(0);
+        Table.Row row = rows.get(0);
         assertEquals(21,row.getCells().size());
         String[] labels = {
             "anonymous1","(a,b,c)","(a,e)","c","c","(a,b,d)","(a,b,d)","(c,d,e)","(b,c)","c","(a,b,c,d)","(b,d)","(b,c,d)","e","b","(b,d)","(b,c)","(b,c)","(b,e)","b","b"
@@ -55,8 +54,5 @@ public class TSVParserTests {
         }
     }
 
-    @Test
-    public void test2() {
-        assertTrue(TEST_ORACLE != null);
-    }
+
 }
