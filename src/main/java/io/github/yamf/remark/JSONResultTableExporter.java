@@ -28,7 +28,7 @@ public class JSONResultTableExporter implements ResultTableExporter {
             row.cells().forEach(cell -> {
                 JSONObject cellJson = new JSONObject();
                 cellJson.put("question",cell.question());
-                cellJson.put("value",cell.value());
+                cellJson.put("mark",cell.value());
                 cellJson.put("possible-answers",toString(cell.allAnswers()));
                 cellJson.put("correct-answers",toString(cell.correctAnswers()));
                 cellJson.put("correctly-selected",toString(cell.correctAnswersSelected()));
@@ -38,6 +38,7 @@ public class JSONResultTableExporter implements ResultTableExporter {
             JSONObject jsonRow = new JSONObject();
             jsonRow.put("id",row.id());
             jsonRow.put("results",array);
+            jsonRow.put("total-marks",row.sum());
             jsonResults.put(jsonRow);
         });
         Files.writeString(file,jsonResults.toString(4));

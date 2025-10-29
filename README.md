@@ -89,12 +89,13 @@ The formula is hardcoded at the moment, but this could be changed easily.
 The default output format is tab-separated values, the respective files can be imported into 
 standard spreadsheet programs like excel. The header line is the same as the one used in the input data table.
 The first column contains an id (usually for the student being marked), the other cells contain the marks calculated, 
-soubles scaled between 0 and 1. 
+doubles scaled between 0 and 1. 
+An additional last column contains the sum of all marks, the header cell value for this column is `SUM`.
 
 ### JSON, with provenance
 
 An optional secondary output format is JSON. This does not only contain the marks, but also some 
-provenance to justify how marks where calculated. 
+provenance to justify how marks where calculated. The total number of marks is also included.
 
 **Example:**
 
@@ -102,6 +103,7 @@ provenance to justify how marks where calculated.
 [
    {
        "id": "student42",
+       "total-marks": 17.25,
        "results": [
            {
               "question": "Q1",

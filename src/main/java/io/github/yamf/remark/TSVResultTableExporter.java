@@ -31,12 +31,12 @@ public class TSVResultTableExporter implements ResultTableExporter {
     static List<String> exportToLines(ResultTable table) {
         List<String> lines = new ArrayList<>();
         lines.add(
-            table.headers().stream().collect(Collectors.joining("\t"))
+            table.headers().stream().collect(Collectors.joining("\t","","\tSUM"))
         );
         lines.addAll(
             table.rows().stream()
                 .map( row -> {
-                    return row.cells().stream().map(mark -> DECIMAL_FORMAT.format(mark.value())).collect(Collectors.joining("\t",row.id()+'\t',""));
+                    return row.cells().stream().map(mark -> DECIMAL_FORMAT.format(mark.value())).collect(Collectors.joining("\t",row.id()+'\t',"\t"+DECIMAL_FORMAT.format(row.sum())));
                 })
                 .collect(Collectors.toUnmodifiableList())
         );
