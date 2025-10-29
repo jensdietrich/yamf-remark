@@ -107,7 +107,11 @@ class TSVTable implements InputTable {
             else {
                 return values.stream().collect(Collectors.joining(",","(",")"));
             }
-
         }
+
+
     }
+
+
+
 }

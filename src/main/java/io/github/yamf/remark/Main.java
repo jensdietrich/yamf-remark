@@ -1,9 +1,13 @@
 package io.github.yamf.remark;
 
-import org.apache.commons.cli.Option;
+import com.google.common.base.Preconditions;
+import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 
@@ -35,9 +39,46 @@ public class Main {
         .desc("a file where the results will be written to")
         .build();
 
+    final static Options OPTIONS = new Options()
+        .addOption(OPT_INPUT)
+        .addOption(OPT_ORACLE)
+        .addOption(OPT_OUT)
+        ;
 
-    public static void main(String[] args) {
 
+    public static void main(String[] args) throws IOException {
+
+        CommandLineParser cliParser = new DefaultParser();
+        InputTableParser parser = new TSVParser();
+
+        try {
+            CommandLine cli = cliParser.parse(OPTIONS, args);
+
+            String inputFileName = cli.getOptionValue(OPT_INPUT);
+            Path inputFile = Path.of(inputFileName);
+            Preconditions.checkState(Files.exists(inputFile));
+            Preconditions.checkState(!Files.isDirectory(inputFile));
+            LOG.info("Reading input from: {}", inputFile);
+            InputTable inputTable = parser.parse(inputFile);
+
+            String oracleFileName = cli.getOptionValue(OPT_ORACLE);
+            Path oracleFile = Path.of(oracleFileName);
+            Preconditions.checkState(Files.exists(oracleFile));
+            Preconditions.checkState(!Files.isDirectory(oracleFile));
+            LOG.info("Reading oracle (correct and possible answers) from: " + oracleFile);
+            InputTable oracleTable = parser.parse(oracleFile);
+
+
+        }
+        catch (ParseException e) {
+            showUsage();
+        }
+
+    }
+
+    private static void showUsage() {
+        HelpFormatter formatter = new HelpFormatter();
+        formatter.printHelp("java -cp <path-to-built-jar> " + Main.class.getName(), OPTIONS);
     }
 
     static void checkHeaders(InputTable input, InputTable oracle) {

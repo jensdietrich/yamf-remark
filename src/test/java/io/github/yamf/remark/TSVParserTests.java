@@ -29,7 +29,7 @@ public class TSVParserTests {
 
     @Test
     public void testDataHeader() throws IOException {
-        InputTable table = TSVParser.parse(TEST_DATA);
+        InputTable table = new TSVParser().parse(TEST_DATA);
         List<String> headerRow = table.getHeaders();
         String[] labels = {
             "SID","Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10","Q11","Q12","Q13","Q14","Q15","Q16","Q17","Q18","Q19","Q20"
@@ -41,7 +41,7 @@ public class TSVParserTests {
 
     @Test
     public void testDataRow1() throws IOException {
-        InputTable table = TSVParser.parse(TEST_DATA);
+        InputTable table = new TSVParser().parse(TEST_DATA);
         List<InputTable.Row> rows = table.getRows();
         assertTrue(0<rows.size());
         InputTable.Row row = rows.get(0);

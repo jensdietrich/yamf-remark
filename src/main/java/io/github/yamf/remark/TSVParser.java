@@ -7,10 +7,9 @@ import java.util.*;
  * Simple TSV input parser.
  * @author jens dietrich
  */
-public class TSVParser {
+public class TSVParser implements InputTableParser {
 
-
-    public static TSVTable parse(Path file) throws IOException {
+    public InputTable parse(Path file) throws IOException {
         TSVTable result = new TSVTable();
 
         try (BufferedReader br = new BufferedReader(new FileReader(file.toFile()))) {
