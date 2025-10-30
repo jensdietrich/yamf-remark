@@ -3,7 +3,7 @@
   <groupId>io.github.yamf</groupId>
   <artifactId>yamf-remark</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.5</version>
+  <version>0.1.0</version>
   <name>yamf-remark</name>
   <properties>
     <maven.compiler.target>17</maven.compiler.target>
