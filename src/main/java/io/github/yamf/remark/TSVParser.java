@@ -66,9 +66,20 @@ public class TSVParser implements InputTableParser {
                     values.add(part);
                 }
             }
-
             return new TSVTable.TSVCell(values);
-        } else {
+        }
+        else if (cellStr.contains(",")) {
+            String[] parts = cellStr.split(",");
+            List<String> values = new ArrayList<>();
+            for (String part : parts) {
+                part = part.trim();
+                if (!part.isEmpty()) {
+                    values.add(part);
+                }
+            }
+            return new TSVTable.TSVCell(values);
+        }
+        else {
             // simple string
             if (!cellStr.isEmpty() && !cellStr.toUpperCase().equals("BLANK")) {
                 return new TSVTable.TSVCell(cellStr);

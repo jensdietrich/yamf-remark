@@ -1,8 +1,6 @@
 package io.github.yamf.remark;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Sets;
-
 import java.util.Set;
 
 /**
