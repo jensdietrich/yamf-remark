@@ -11,7 +11,7 @@ import java.util.Set;
 public class PartialCreditsAndPartialDeductions implements Formula {
 
     @Override
-    public Mark compute(String question,Set<String> answersSelected, Set<String> correctAnswers, Set<String> allAnswers) {
+    public Mark compute(String question,Set<String> answersSelected, Set<String> correctAnswers, Set<String> allAnswers, int scalingFactorUsed) {
 
         Preconditions.checkArgument(!correctAnswers.isEmpty(),"The set of correct answers must not be empty");
         Preconditions.checkArgument(!allAnswers.isEmpty(),"The set of all answers must not be empty");
@@ -34,7 +34,10 @@ public class PartialCreditsAndPartialDeductions implements Formula {
             m = 0.0;
         }
 
-        return new Mark(m,question,correctAnswersSelected,incorrectAnswersSelected,correctAnswers,allAnswers);
+        // scale
+        m = scalingFactorUsed*m;
+
+        return new Mark(m,question,correctAnswersSelected,incorrectAnswersSelected,correctAnswers,allAnswers,scalingFactorUsed);
     }
 
 }

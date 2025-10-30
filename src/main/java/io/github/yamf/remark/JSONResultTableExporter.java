@@ -33,6 +33,9 @@ public class JSONResultTableExporter implements ResultTableExporter {
                 cellJson.put("correct-answers",toString(cell.correctAnswers()));
                 cellJson.put("correctly-selected",toString(cell.correctAnswersSelected()));
                 cellJson.put("incorrectly-selected",toString(cell.incorrectAnswersSelected()));
+                if (cell.scalingFactorUsed()!=1) {
+                    cellJson.put("scalingfactor", cell.scalingFactorUsed());
+                }
                 array.put(cellJson);
             });
             JSONObject jsonRow = new JSONObject();

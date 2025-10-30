@@ -9,6 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
+/**
+ * Program CLI.
+ * @author jens dietrich
+ */
 public class Main {
 
     final static Logger LOG = LoggerFactory.getLogger(Main.class);
@@ -45,11 +49,20 @@ public class Main {
         .desc("a JSON file where the results with additional provenance information will be written to")
         .build();
 
+    final static Option OPT_SCALING_FACTOR = Option.builder()
+        .argName("sca")
+        .longOpt("scalingfactor")
+        .required(false)
+        .hasArg()
+        .desc("a positive number by which all marks are multiplied (optional, default is 1)")
+        .build();
+
     final static Options OPTIONS = new Options()
         .addOption(OPT_INPUT)
         .addOption(OPT_ORACLE)
         .addOption(OPT_OUT)
         .addOption(OPT_PROVENANCE)
+        .addOption(OPT_SCALING_FACTOR);
         ;
 
 
@@ -73,7 +86,14 @@ public class Main {
             Preconditions.checkState(!Files.isDirectory(oracleFile));
             LOG.info("Reading oracle (correct and possible answers) from: " + oracleFile);
 
-            ResultTable results = mark(inputFile,oracleFile);
+            int scalingFactor = 1;
+            if (cli.hasOption(OPT_SCALING_FACTOR)) {
+                scalingFactor = Integer.parseInt(cli.getOptionValue(OPT_SCALING_FACTOR));
+                Preconditions.checkArgument(scalingFactor > 0, "scaling factor must be greater than 0");
+                LOG.info("Using scaling factor: {}", scalingFactor);
+            }
+
+            ResultTable results = mark(inputFile,oracleFile,scalingFactor);
             LOG.info("Marking done, marked {} records",results.rows().size());
 
             String outputFileName = cli.getOptionValue(OPT_OUT);
@@ -96,7 +116,7 @@ public class Main {
 
     }
 
-    static ResultTable mark(Path inputFile, Path oracleFile) throws IOException {
+    static ResultTable mark(Path inputFile, Path oracleFile,int scalingFactor) throws IOException {
 
         Formula formula = new PartialCreditsAndPartialDeductions();
         InputTable input = getParser(inputFile).parse(inputFile);
@@ -119,7 +139,8 @@ public class Main {
                     question,
                     row.getCells().get(i).getValuesAsSet(),
                     correctValues.getCells().get(i).getValuesAsSet(),
-                    possibleValues.getCells().get(i).getValuesAsSet()
+                    possibleValues.getCells().get(i).getValuesAsSet(),
+                    scalingFactor
                 );
                 markList.add(mark);
             }

@@ -32,6 +32,8 @@ java -jar yamf-remark.jar
     --provenance <pro> a file where results will be written to 
                      in JSON format with additional provenance information
                      (optional)
+    --scalingfactor  <sca> a positive number by which all marks are multiplied
+                     (optional, default is 1)
 ```
 
 ## Structure Of Input Files
@@ -48,7 +50,7 @@ Tables are saved in tab-separated (.tsv) format.
 The oracle table has three rows: 
 
 1. a header row with question ids in columns 2,3, .. 
-2. a row with correct answers
+2. a row with the correct answers
 3. a row with all possible answers (usually the values are all the same)
 4. the first column has descriptive labels
 
