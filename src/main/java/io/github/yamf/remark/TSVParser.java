@@ -17,16 +17,18 @@ public class TSVParser implements InputTableParser {
             boolean isFirstLine = true;
 
             while ((line = br.readLine()) != null) {
-                if (isFirstLine) {
-                    // Parse header line
-                    String[] headers = line.split("\t");
-                    result.setHeaders(Arrays.asList(headers));
-                    isFirstLine = false;
-                } else {
-                    // Parse data line
-                    String[] cells = line.split("\t", -1); // -1 to include trailing empty strings
-                    TSVTable.TSVRow row = parseRow(cells);
-                    result.addRow(row);
+                if (!line.isBlank()) {
+                    if (isFirstLine) {
+                        // Parse header line
+                        String[] headers = line.split("\t");
+                        result.setHeaders(Arrays.asList(headers));
+                        isFirstLine = false;
+                    } else {
+                        // Parse data line
+                        String[] cells = line.split("\t", -1); // -1 to include trailing empty strings
+                        TSVTable.TSVRow row = parseRow(cells);
+                        result.addRow(row);
+                    }
                 }
             }
         }
