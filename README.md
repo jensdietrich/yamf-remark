@@ -73,6 +73,8 @@ student identifiers. Non-header rows have the answers selected by students.
 | 12345 | "(b,d)"       | "(a,e)" | "(a,c,e)" |
 | 12346 | "(a,b,c,d,e)" | a       | "(d,e)"   |
 
+The cell value `BLANK` is also accepted, it is used by _REMARK_ to indicate that no answer option was selected.
+
 ## Formula
 
 The formula used is implemented in `io.github.yamf.remark.PartialCreditsAndPartialDeductions`,
