@@ -7,7 +7,7 @@ Marking exam scripts scanned with the [remark software](https://remarksoftware.c
 - Java version 17 or better
 - Maven 3 (tested with 3.9.10) (only required to build from sources)
 
-## Building
+## Building From Source (Optional)
 
 The package will be automatically build and released on GitHub, and the latest version can be downloaded from 
 the [project release page](https://github.com/jensdietrich/yamf-remark/packages/).
@@ -19,7 +19,7 @@ To build the project from sources, use _git_ to checkout the sources and then bu
 ## Usage 
 
 ```
-java -jar yamf-remark.jar
+java -jar yamf-remark-<version>.jar
     --input <in>     a file in tab-separated format with answers chosen by
                      student for each question
                      (required)
