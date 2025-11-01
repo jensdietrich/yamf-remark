@@ -32,7 +32,7 @@ public class IntegrationTests {
 
     @BeforeEach
     public void init() throws IOException {
-        marks = Main.mark(TEST_DATA,TEST_ORACLE);
+        marks = Main.mark(TEST_DATA,TEST_ORACLE,1);
     }
 
     @Test
